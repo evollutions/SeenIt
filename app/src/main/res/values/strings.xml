@@ -13,4 +13,7 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="home_second">Home Second</string>
+
+    <string name="no_stickers_in_area">No stickers found in your area</string>
+    <string name="stickers_in_area">Found %1$d stickers in your area</string>
 </resources>
