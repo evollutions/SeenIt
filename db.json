@@ -1,7 +1,7 @@
 {
   "stickersForLoc": [
     {
-      "loc": 1,
+      "id": 1,
       "stickers": [
         {
           "id": 1,
@@ -17,6 +17,16 @@
           "id": 3,
           "name": "Fakultní nemocnice",
           "loc": "50.196267,15.827232"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "stickers": [
+        {
+          "id": 4,
+          "name": "Cyklozastávka U Pytláka",
+          "loc": "50.202783,15.905794"
         }
       ]
     }
