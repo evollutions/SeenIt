@@ -48,24 +48,27 @@
       "collectedByPercent": 70
     }
   ],
-  "stickersForLoc": [
+  "stickersForLocAndUser": [
     {
       "id": 1,
       "stickers": [
         {
           "id": 1,
           "name": "Bílá věž",
-          "loc": "50.209016,15.830845"
+          "loc": "50.209016,15.830845",
+          "collected": true
         },
         {
           "id": 2,
           "name": "Jiráskovy sady",
-          "loc": "50.206123,15.826470"
+          "loc": "50.206123,15.826470",
+          "collected": true
         },
         {
           "id": 3,
           "name": "Fakultní nemocnice",
-          "loc": "50.196267,15.827232"
+          "loc": "50.196267,15.827232",
+          "collected": false
         }
       ]
     }
