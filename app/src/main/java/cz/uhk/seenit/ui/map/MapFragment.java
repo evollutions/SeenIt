@@ -33,7 +33,7 @@ import org.json.JSONObject;
 
 import cz.uhk.seenit.R;
 import cz.uhk.seenit.model.Sticker;
-import cz.uhk.seenit.model.StickersForLocAndUser;
+import cz.uhk.seenit.model.StickersForLoc;
 import cz.uhk.seenit.utils.JsonRequest;
 
 import static android.content.Context.LOCATION_SERVICE;
@@ -63,10 +63,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, OnMarke
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
-        // Tlacitko zobrazeni lokace uzivatele
+        // Zobrazeni tlacitka na presun na lokaci uzivatele
         map.setMyLocationEnabled(true);
 
-        // Callback pri kliknuti na marker
+        // Listener kliknuti na marker pro zobrazeni detailu samolepky
         map.setOnMarkerClickListener(this);
 
         locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
@@ -119,7 +119,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, OnMarke
     private final Listener<JSONObject> getStickersForLocListener = new Listener<JSONObject>() {
         // Mame samolepky dostupne v okoli uzivatele
         public void onResponse(JSONObject response) {
-            StickersForLocAndUser result = JsonRequest.getJavaObjectFromJson(response, StickersForLocAndUser.class);
+            StickersForLoc result = JsonRequest.getJavaObjectFromJson(response, StickersForLoc.class);
 
             // Pro kazdou samolepku pridame na mapu marker co reprezentuje jeji pozici
             for (Sticker sticker : result.getStickers()) {

@@ -3,12 +3,12 @@ package cz.uhk.seenit.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StickersForLocAndUser {
+public class StickersForLoc {
 
     private int id;
     private List<Sticker> stickers;
 
-    public StickersForLocAndUser() {
+    public StickersForLoc() {
         stickers = new ArrayList<>();
     }
 
