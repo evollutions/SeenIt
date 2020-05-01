@@ -8,13 +8,13 @@
         {
           "id": 1,
           "name": "Bílá věž",
-          "iconUrl": "https://via.placeholder.com/300x100?text=Vez",
+          "iconUrl": "https://i.imgur.com/IlXGUh3.png",
           "collectedDate": "2020-04-25"
         },
         {
           "id": 2,
           "name": "Jiráskovy sady",
-          "iconUrl": "https://via.placeholder.com/300x100?text=Sady",
+          "iconUrl": "https://i.imgur.com/MubILbB.png",
           "collectedDate": "2020-04-21"
         }
       ]
@@ -25,7 +25,7 @@
       "id": 1,
       "name": "Bílá věž",
       "desc": "Bílá věž desc",
-      "iconUrl": "https://via.placeholder.com/300?text=Vez",
+      "iconUrl": "https://i.imgur.com/qfy7S72.png",
       "collectedDate": "2020-04-25",
       "collectedLastDate": "2020-04-30",
       "collectedByPercent": 15
@@ -34,7 +34,7 @@
       "id": 2,
       "name": "Jiráskovy sady",
       "desc": "Jiráskovy sady desc",
-      "iconUrl": "https://via.placeholder.com/300?text=Sady",
+      "iconUrl": "https://i.imgur.com/ZDhgoiG.png",
       "collectedDate": "2020-04-21",
       "collectedLastDate": "2020-04-29",
       "collectedByPercent": 42
@@ -43,7 +43,7 @@
       "id": 3,
       "name": "Fakultní nemocnice",
       "desc": "Fakultní nemocnice desc",
-      "iconUrl": "https://via.placeholder.com/300?text=Nemocnice",
+      "iconUrl": "https://i.imgur.com/CHNO7OY.png",
       "collectedLastDate": "2020-04-27",
       "collectedByPercent": 70
     }
