@@ -3,8 +3,9 @@ package cz.uhk.seenit.model;
 public class Sticker {
     private int id;
     private String name;
-    private String loc;
     private boolean collected;
+    private float latitude;
+    private float longitude;
 
     public int getId() {
         return id;
@@ -22,10 +23,6 @@ public class Sticker {
         this.name = name;
     }
 
-    public void setLoc(String loc) {
-        this.loc = loc;
-    }
-
     public boolean isCollected() {
         return collected;
     }
@@ -34,13 +31,19 @@ public class Sticker {
         this.collected = collected;
     }
 
-    // Zemepisna sirka je prvni index v loc (pred carkou)
     public float getLatitude() {
-        return Float.parseFloat(loc.split(",")[0]);
+        return latitude;
     }
 
-    // Zemepisna delka je druhy index v loc (za carkou)
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
     public float getLongitude() {
-        return Float.parseFloat(loc.split(",")[1]);
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
     }
 }
