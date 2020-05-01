@@ -24,7 +24,7 @@
     {
       "id": 1,
       "name": "Bílá věž",
-      "desc": "Bílá věž desc",
+      "desc": "Bílá věž. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et diam semper, rutrum turpis eget, luctus felis.",
       "iconUrl": "https://i.imgur.com/qfy7S72.png",
       "collectedDate": "2020-04-25",
       "collectedLastDate": "2020-04-30",
@@ -33,7 +33,7 @@
     {
       "id": 2,
       "name": "Jiráskovy sady",
-      "desc": "Jiráskovy sady desc",
+      "desc": "Jiráskovy sady. Nulla laoreet a nisl id vestibulum. Duis non lobortis est. Donec rhoncus diam arcu, et malesuada dolor aliquam a.",
       "iconUrl": "https://i.imgur.com/ZDhgoiG.png",
       "collectedDate": "2020-04-21",
       "collectedLastDate": "2020-04-29",
@@ -42,7 +42,7 @@
     {
       "id": 3,
       "name": "Fakultní nemocnice",
-      "desc": "Fakultní nemocnice desc",
+      "desc": "Fakultní nemocnice. Duis maximus tincidunt malesuada. Suspendisse ut convallis neque, quis placerat mauris. Suspendisse sit amet nulla est.",
       "iconUrl": "https://i.imgur.com/CHNO7OY.png",
       "collectedLastDate": "2020-04-27",
       "collectedByPercent": 70

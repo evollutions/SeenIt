@@ -33,11 +33,12 @@ import org.json.JSONObject;
 
 import cz.uhk.seenit.R;
 import cz.uhk.seenit.StickerDetailActivity;
+import cz.uhk.seenit.model.MarkerInfo;
 import cz.uhk.seenit.model.Sticker;
 import cz.uhk.seenit.model.StickersForLoc;
 import cz.uhk.seenit.ui.BaseFragment;
-import cz.uhk.seenit.utils.JsonRequest;
-import cz.uhk.seenit.utils.LogUtils;
+import cz.uhk.seenit.utils.Logger;
+import cz.uhk.seenit.utils.VolleyUtils;
 
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -117,7 +118,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
         public void onLocationChanged(@NotNull final Location location) {
             // Mame aktualni lokaci uzivatele, muzeme udelat request na samolepky v okoli
             // Request je bez parametru protoze pouzivame fake json api, jinak by jsme posilali lokaci uzivatele
-            JsonRequest.Get(URL, getStickersForLocListener, getStickersForLocErrorListener, getContext());
+            VolleyUtils.MakeGetRequest(URL, getStickersForLocListener, getStickersForLocErrorListener, getContext());
 
             // Pribliz kameru mapy na pozici uzivatele
             CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -148,7 +149,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
         @Override
         public void onResponse(JSONObject response) {
             // Preved odpoved na pouzitelny objekt
-            StickersForLoc result = JsonRequest.getJavaObjectFromJson(response, StickersForLoc.class);
+            StickersForLoc result = VolleyUtils.getJavaObjectFromJson(response, StickersForLoc.class);
 
             // Pro kazdou samolepku pridame na mapu marker co ji reprezentuje
             for (Sticker sticker : result.getStickers()) {
@@ -164,7 +165,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
 
                 Marker marker = map.addMarker(markerOptions);
                 // Markeru nastavime tag abychom v listeneru vedeli jestli uzivatel samolepku sebral
-                marker.setTag(sticker.isCollected());
+                marker.setTag(new MarkerInfo(sticker.getId(), sticker.isCollected()));
             }
 
             // Nastaveni textu snackbaru podle poctu samolepek
@@ -180,17 +181,18 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
     private final Response.ErrorListener getStickersForLocErrorListener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            LogUtils.LogError(error);
+            Logger.LogError(error);
             showToast(R.string.could_not_load_stickers_in_area);
         }
     };
 
     @Override
     public boolean onMarkerClick(@NotNull Marker marker) {
-        boolean collected = (boolean) marker.getTag();
+        MarkerInfo markerInfo = (MarkerInfo) marker.getTag();
 
-        if (collected) {
+        if (markerInfo.isCollected()) {
             Intent intent = new Intent(getActivity(), StickerDetailActivity.class);
+            intent.putExtra(StickerDetailActivity.INTENT_STICKER_ID, markerInfo.getStickerId());
             startActivity(intent);
         } else {
             showSnackbar(R.string.sticker_not_collected);
@@ -206,7 +208,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
                 // Mame povoleni k lokaci, muzeme pokracovat
                 initializeMap();
             } else {
-                LogUtils.LogWarning(getResString(R.string.no_permission_location));
+                Logger.LogWarning(getResString(R.string.no_permission_location));
                 showToast(R.string.no_permission_location);
             }
         } else {

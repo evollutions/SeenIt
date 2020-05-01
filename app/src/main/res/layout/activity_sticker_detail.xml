@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar2"
+            android:id="@+id/sticker_detail_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -26,23 +26,98 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
+            android:layout_height="match_parent"
+            android:padding="20dp">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/sticker_detail_icon"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_centerHorizontal="true"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/sticker_detail_name"
+                android:layout_below="@id/sticker_detail_icon"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="@string/placeholder"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sticker_detail_desc_card"
+                android:layout_below="@id/sticker_detail_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/card_view_margin"
+                app:cardCornerRadius="@dimen/card_view_corner_radius">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="bla">
-                </androidx.appcompat.widget.AppCompatTextView>
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.cardview.widget.CardView>
+                    android:padding="@dimen/card_view_padding">
+                    
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/sticker_detail_desc_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/description"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/sticker_detail_desc_text"
+                        android:layout_below="@id/sticker_detail_desc_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sticker_detail_stats_card"
+                android:layout_below="@id/sticker_detail_desc_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/card_view_margin"
+                app:cardCornerRadius="@dimen/card_view_corner_radius">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/card_view_padding">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/sticker_detail_stats_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stats"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/sticker_detail_stats_collected_date"
+                        android:layout_below="@id/sticker_detail_stats_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/sticker_detail_stats_collected_by"
+                        android:layout_below="@id/sticker_detail_stats_collected_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/sticker_detail_stats_collected_last_date"
+                        android:layout_below="@id/sticker_detail_stats_collected_by"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

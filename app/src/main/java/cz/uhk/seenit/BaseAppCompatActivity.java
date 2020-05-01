@@ -1,19 +1,17 @@
-package cz.uhk.seenit.ui;
+package cz.uhk.seenit;
 
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 
 import cz.uhk.seenit.utils.GuiUtils;
 
-public class BaseFragment extends Fragment {
+public class BaseAppCompatActivity extends AppCompatActivity {
 
     public String getResString(@StringRes int id) {
         return GuiUtils.getResString(id, getResources());
@@ -28,7 +26,7 @@ public class BaseFragment extends Fragment {
     }
 
     private void showSnackbar(String text, int length) {
-        GuiUtils.showSnackbar(text, length, getActivity().findViewById(android.R.id.content));
+        GuiUtils.showSnackbar(text, length, findViewById(android.R.id.content));
     }
 
     public void showToast(String text) {
@@ -40,7 +38,7 @@ public class BaseFragment extends Fragment {
     }
 
     private void showToast(String text, int length) {
-        GuiUtils.showToast(text, length, getContext());
+        GuiUtils.showToast(text, length, this);
     }
 
     public void showOkDialog(@StringRes int titleId, @StringRes int messageId, @Nullable DialogInterface.OnClickListener listener) {
@@ -48,10 +46,6 @@ public class BaseFragment extends Fragment {
     }
 
     public void showOkDialog(String title, String message, @Nullable DialogInterface.OnClickListener listener) {
-        GuiUtils.showOkDialog(title, message, listener, getContext());
-    }
-
-    public boolean checkPermission(String permission) {
-        return ContextCompat.checkSelfPermission(getContext(), permission) == PackageManager.PERMISSION_GRANTED;
+        GuiUtils.showOkDialog(title, message, listener, this);
     }
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StickersForLoc {
-
     private int id;
     private List<Sticker> stickers;
 
