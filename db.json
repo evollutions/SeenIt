@@ -2,20 +2,32 @@
   "overviews": [
     {
       "id": 1,
-      "collectedStickerCount": 2,
+      "collectedStickerCount": 4,
       "totalStickerCount": 10,
       "stickers": [
         {
           "id": 1,
           "name": "Bílá věž",
-          "iconUrl": "https://i.imgur.com/IlXGUh3.png",
-          "collectedDate": "2020-04-25"
+          "iconUrl": "https://i.imgur.com/yfCdoMw.jpg",
+          "collectedDate": "2020-01-25"
+        },
+        {
+          "id": 4,
+          "name": "Cyklozastávka U Pytláka",
+          "iconUrl": "https://i.imgur.com/OCV3QCJ.jpg",
+          "collectedDate": "2020-02-15"
         },
         {
           "id": 2,
           "name": "Jiráskovy sady",
-          "iconUrl": "https://i.imgur.com/MubILbB.png",
-          "collectedDate": "2020-04-21"
+          "iconUrl": "https://i.imgur.com/md0h773.jpg",
+          "collectedDate": "2020-03-21"
+        },
+        {
+          "id": 5,
+          "name": "Stříbrný rybník",
+          "iconUrl": "https://i.imgur.com/XB3aNDp.jpg",
+          "collectedDate": "2020-04-03"
         }
       ]
     }
@@ -24,28 +36,38 @@
     {
       "id": 1,
       "name": "Bílá věž",
-      "desc": "Bílá věž. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et diam semper, rutrum turpis eget, luctus felis. Quisque sed metus arcu. In facilisis molestie diam, non finibus sapien elementum quis. Maecenas venenatis risus et magna condimentum tincidunt. Aliquam metus metus, tincidunt vel rhoncus a, fermentum id dolor.",
-      "iconUrl": "https://i.imgur.com/qfy7S72.png",
-      "collectedDate": "2020-04-25",
+      "desc": "Bílá věž. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et diam semper, rutrum turpis eget, luctus felis. Quisque sed metus arcu. In facilisis molestie diam, non finibus sapien elementum quis. Maecenas venenatis risus et magna condimentum tincidunt. Proin velit ex, consectetur id velit in, hendrerit pretium lacus. Aliquam metus metus, tincidunt vel rhoncus a, fermentum id dolor.",
+      "iconUrl": "https://i.imgur.com/uvBeqsm.jpg",
+      "collectedDate": "2020-01-25",
       "collectedLastDate": "2020-04-30",
       "collectedByPercent": 15
     },
     {
       "id": 2,
       "name": "Jiráskovy sady",
-      "desc": "Jiráskovy sady. Nulla laoreet a nisl id vestibulum. Duis non lobortis est. Donec rhoncus diam arcu, et malesuada dolor aliquam a. Praesent facilisis felis nec dictum tristique. Etiam nec aliquet leo, ut imperdiet lacus. Phasellus bibendum, odio a varius pharetra, orci mauris congue tellus, quis vestibulum libero ex sit amet elit.",
-      "iconUrl": "https://i.imgur.com/ZDhgoiG.png",
-      "collectedDate": "2020-04-21",
+      "desc": "Jiráskovy sady. Nulla laoreet a nisl id vestibulum. Duis non lobortis est. In facilisis molestie diam, non finibus sapien elementum quis. Donec rhoncus diam arcu, et malesuada dolor aliquam a. Praesent facilisis felis nec dictum tristique. Etiam nec aliquet leo, ut imperdiet lacus. Phasellus bibendum, odio a varius pharetra, orci mauris congue tellus, quis vestibulum libero ex sit amet elit.",
+      "iconUrl": "https://i.imgur.com/098wXVa.jpg",
+      "collectedDate": "2020-03-21",
       "collectedLastDate": "2020-04-29",
       "collectedByPercent": 42
     },
     {
-      "id": 3,
-      "name": "Fakultní nemocnice",
-      "desc": "Fakultní nemocnice. Duis maximus tincidunt malesuada. Quisque sed metus arcu. In facilisis molestie diam, non finibus sapien elementum quis. Suspendisse ut convallis neque, quis placerat mauris. Suspendisse sit amet nulla est. Aliquam vestibulum odio sed augue eleifend maximus. Proin velit ex, consectetur id velit in, hendrerit pretium lacus.",
-      "iconUrl": "https://i.imgur.com/CHNO7OY.png",
-      "collectedLastDate": "2020-04-27",
-      "collectedByPercent": 70
+      "id": 4,
+      "name": "Cyklozastávka U Pytláka",
+      "desc": "Cyklozastávka U Pytláka. Vestibulum ac blandit arcu. Morbi finibus efficitur dui, sagittis cursus elit pulvinar non. Cras accumsan molestie purus, sit amet blandit turpis porta eu. Proin ornare urna sed sollicitudin semper. Morbi pretium euismod elit, ac convallis turpis ullamcorper et. Mauris aliquet tortor eu nulla euismod, in commodo dolor hendrerit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas nec risus et velit faucibus ornare et in augue. Aliquam cursus erat quis porttitor tristique.",
+      "iconUrl": "https://i.imgur.com/EQrCE0M.jpg",
+      "collectedDate": "2020-02-15",
+      "collectedLastDate": "2020-04-30",
+      "collectedByPercent": 94
+    },
+    {
+      "id": 5,
+      "name": "Stříbrný rybník",
+      "desc": "Stříbrný rybník. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Pellentesque hendrerit est non libero varius dignissim. Etiam nunc lectus, vulputate suscipit enim ut, bibendum porta tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus semper vestibulum mauris vitae egestas. Vivamus sed lorem ac ex aliquet congue.",
+      "iconUrl": "https://i.imgur.com/Vt8VzN7.jpg",
+      "collectedDate": "2020-04-03",
+      "collectedLastDate": "2020-04-03",
+      "collectedByPercent": 61
     }
   ],
   "stickersForLoc": [
@@ -72,6 +94,25 @@
           "collected": false,
           "latitude": 50.196267,
           "longitude": 15.827232
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "stickers": [
+        {
+          "id": 4,
+          "name": "Cyklozastávka U Pytláka",
+          "collected": true,
+          "latitude": 50.202884,
+          "longitude": 15.905482
+        },
+        {
+          "id": 5,
+          "name": "Stříbrný rybník",
+          "collected": true,
+          "latitude": 50.205975,
+          "longitude": 15.892488
         }
       ]
     }
