@@ -1,4 +1,5 @@
 <resources>
+    <!-- Navigace -->
     <string name="app_name">SeenIt</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -14,6 +15,16 @@
 
     <string name="home_second">Home Second</string>
 
+    <string name="activity_detail">Detail</string>
+
+    <!-- Hlasky -->
     <string name="no_stickers_in_area">No stickers found in your area</string>
     <string name="stickers_in_area">Found %1$d stickers in your area</string>
+    <string name="sticker_not_collected">You have to collect this sticker first</string>
+    <string name="could_not_load_stickers_in_area">Stickers in your area could not be loaded</string>
+    <string name="need_permission_location">This functionality will not be available without location permission</string>
+    <string name="no_permission_location">Location permission not granted, this functionality will not be available</string>
+
+    <!-- Obecne -->
+    <string name="alert">Alert</string>
 </resources>

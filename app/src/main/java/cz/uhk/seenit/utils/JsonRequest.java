@@ -6,15 +6,14 @@ import androidx.annotation.Nullable;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response.Listener;
 import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
 import org.json.JSONObject;
-
 
 public class JsonRequest {
 
@@ -47,6 +46,7 @@ public class JsonRequest {
             return gson.fromJson(jsonObject.toString(), objectClass);
         } catch (JsonParseException exception) {
             // Udelat neco pokud se nepovede prevod?
+            LogUtils.LogError(exception);
             throw exception;
         }
     }
