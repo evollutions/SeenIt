@@ -29,13 +29,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="20dp">
+            android:padding="@dimen/layout_padding">
 
             <com.android.volley.toolbox.NetworkImageView
                 android:id="@+id/sticker_detail_icon"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/sticker_detail_name"
@@ -72,6 +73,7 @@
                         android:layout_below="@id/sticker_detail_desc_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:justificationMode="inter_word"
                         android:text="@string/placeholder"/>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>

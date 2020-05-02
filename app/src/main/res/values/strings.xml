@@ -20,8 +20,11 @@
     <string name="no_stickers_in_area">No stickers found in your area</string>
     <string name="stickers_in_area">Found %1$d stickers in your area</string>
     <string name="sticker_not_collected">You have to collect this sticker to show more information</string>
+    <string name="collected_stickers_stats">You have collected %1$d of %2$d available stickers so far</string>
+    <string name="collected_stickers">Collected stickers</string>
     <string name="could_not_load_sticker_detail">Detail for sticker could not be loaded</string>
     <string name="could_not_load_stickers_in_area">Stickers in your area could not be loaded</string>
+    <string name="could_not_load_overview">Overview could not be loaded</string>
     <string name="need_permission_location">This functionality will not be available without location permission</string>
     <string name="no_permission_location">Location permission not granted, this functionality will not be available</string>
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.overview.OverviewFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/layout_padding">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/overview_stats_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="@string/collected_stickers_stats"/>
+
+            <ProgressBar
+                android:id="@+id/overview_stats_progress"
+                android:layout_below="@id/overview_stats_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="0"
+                style="?android:attr/progressBarStyleHorizontal"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/overview_collected_title"
+                android:layout_below="@id/overview_stats_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/collected_stickers"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/overview_collected_recycler"
+                android:layout_below="@id/overview_collected_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

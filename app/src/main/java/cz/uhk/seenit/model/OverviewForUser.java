@@ -1,21 +1,24 @@
 package cz.uhk.seenit.model;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class StickersForLoc {
+public class OverviewForUser {
     public int id;
+    public int collectedStickerCount;
+    public int totalStickerCount;
     public List<Sticker> stickers;
 
-    public StickersForLoc() {
+    public OverviewForUser() {
         stickers = new ArrayList<>();
     }
 
     public class Sticker {
         public int id;
         public String name;
-        public boolean collected;
-        public float latitude;
-        public float longitude;
+        public URL iconUrl;
+        public Date collectedDate;
     }
 }
