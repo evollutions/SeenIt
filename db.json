@@ -116,5 +116,23 @@
         }
       ]
     }
+  ],
+  "collect": [
+    {
+      "id": 1,
+      "success": true,
+      "message": "Sticker successfully collected",
+      "stickerId": 3
+    },
+    {
+      "id": 2,
+      "success": false,
+      "message": "Sticker already collected"
+    },
+    {
+      "id": 3,
+      "success": false,
+      "message": "Invalid sticker"
+    }
   ]
 }
