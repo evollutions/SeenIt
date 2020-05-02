@@ -52,6 +52,15 @@
       "collectedByPercent": 42
     },
     {
+      "id": 3,
+      "name": "Fakultní nemocnice",
+      "desc": "Fakultní nemocnice. Vestibulum ac blandit arcu. Morbi finibus efficitur dui, sagittis cursus elit pulvinar non. Cras accumsan molestie purus, sit amet blandit turpis porta eu. Proin ornare urna sed sollicitudin semper. Morbi pretium euismod elit, ac convallis turpis ullamcorper et. Mauris aliquet tortor eu nulla euismod, in commodo dolor hendrerit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas nec risus et velit faucibus ornare et in augue. Aliquam cursus erat quis porttitor tristique.",
+      "iconUrl": "https://i.imgur.com/qJQR1gv.jpg",
+      "collectedDate": "2020-05-07",
+      "collectedLastDate": "2020-05-07",
+      "collectedByPercent": 5
+    },
+    {
       "id": 4,
       "name": "Cyklozastávka U Pytláka",
       "desc": "Cyklozastávka U Pytláka. Vestibulum ac blandit arcu. Morbi finibus efficitur dui, sagittis cursus elit pulvinar non. Cras accumsan molestie purus, sit amet blandit turpis porta eu. Proin ornare urna sed sollicitudin semper. Morbi pretium euismod elit, ac convallis turpis ullamcorper et. Mauris aliquet tortor eu nulla euismod, in commodo dolor hendrerit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas nec risus et velit faucibus ornare et in augue. Aliquam cursus erat quis porttitor tristique.",
