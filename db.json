@@ -136,10 +136,15 @@
     {
       "id": 2,
       "success": false,
-      "message": "Sticker already collected"
+      "message": "Your location doesn't match sticker location"
     },
     {
       "id": 3,
+      "success": false,
+      "message": "Sticker already collected"
+    },
+    {
+      "id": 4,
       "success": false,
       "message": "Invalid sticker"
     }
