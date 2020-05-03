@@ -25,13 +25,13 @@
             android:layout_below="@id/overview_sticker_name"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/overview_sticker_collected"
             android:layout_below="@id/overview_sticker_icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/description"/>
+            android:text="@string/description" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

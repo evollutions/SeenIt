@@ -20,7 +20,7 @@ import cz.uhk.seenit.R;
 import cz.uhk.seenit.model.OverviewForUser;
 import cz.uhk.seenit.ui.BaseFragment;
 import cz.uhk.seenit.utils.Logger;
-import cz.uhk.seenit.utils.VolleyUtils;
+import cz.uhk.seenit.utils.VolleyHelper;
 
 public class OverviewFragment extends BaseFragment {
 
@@ -47,14 +47,14 @@ public class OverviewFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Po vytvoreni pohledu udelame request na overview uzivatele
-        VolleyUtils.MakeGetRequest(FAKE_URL, getOverviewForUserListener, getOverviewForUserErrorListener, getContext());
+        VolleyHelper.MakeGetRequest(FAKE_URL, getOverviewForUserListener, getOverviewForUserErrorListener, getContext());
     }
 
     private final Response.Listener<JSONObject> getOverviewForUserListener = new Response.Listener<JSONObject>() {
         @Override
         // Nacteni prehledu pro uzivatele bylo uspesne
         public void onResponse(JSONObject response) {
-            OverviewForUser result = VolleyUtils.getJavaObjectFromJson(response, OverviewForUser.class);
+            OverviewForUser result = VolleyHelper.getJavaObjectFromJson(response, OverviewForUser.class);
 
             // Nastaveni progress baru
             ProgressBar progressBar = getView().findViewById(R.id.overview_stats_progress);

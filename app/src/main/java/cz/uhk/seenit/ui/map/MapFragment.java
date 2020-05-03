@@ -33,7 +33,7 @@ import cz.uhk.seenit.model.MarkerInfo;
 import cz.uhk.seenit.model.StickersForLoc;
 import cz.uhk.seenit.ui.BaseFragment;
 import cz.uhk.seenit.utils.Logger;
-import cz.uhk.seenit.utils.VolleyUtils;
+import cz.uhk.seenit.utils.VolleyHelper;
 
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -107,7 +107,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
             int locationId = location.getLatitude() > 50.203 ? 1 : 2;
 
             // Request je bez parametru protoze pouzivame fake JSON API, jinak by jsme posilali lokaci uzivatele
-            VolleyUtils.MakeGetRequest(FAKE_URL + locationId, getStickersForLocListener, getStickersForLocErrorListener, getContext());
+            VolleyHelper.MakeGetRequest(FAKE_URL + locationId, getStickersForLocListener, getStickersForLocErrorListener, getContext());
 
             // Pribliz kameru mapy na pozici uzivatele
             CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -138,7 +138,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
         @Override
         public void onResponse(JSONObject response) {
             // Preved odpoved na pouzitelny objekt
-            StickersForLoc result = VolleyUtils.getJavaObjectFromJson(response, StickersForLoc.class);
+            StickersForLoc result = VolleyHelper.getJavaObjectFromJson(response, StickersForLoc.class);
 
             // Vycistime mapu pro pripad ze uz mame markery na mape
             map.clear();

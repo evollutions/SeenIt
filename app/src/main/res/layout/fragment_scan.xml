@@ -18,18 +18,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:text="@string/scan_hint"/>
+            android:text="@string/scan_hint" />
 
         <ProgressBar
             android:id="@+id/scan_progressbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminate="true"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/scan_view_finder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 </LinearLayout>

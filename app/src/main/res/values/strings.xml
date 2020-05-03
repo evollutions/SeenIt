@@ -15,6 +15,7 @@
     <string name="home_second">Home Second</string>
 
     <string name="activity_detail">Detail</string>
+    <string name="activity_sign_in">Sign in</string>
 
     <!-- Hlasky -->
     <string name="no_stickers_in_area">No stickers found in your area</string>
@@ -27,6 +28,8 @@
     <string name="invalid_sticker">Not a valid sticker, try another one</string>
     <string name="permissions_needed">This functionality will not be available without required permissions. Do you want to grant these permissions now?</string>
     <string name="permissions_not_granted">This functionality is not available because required permissions were not granted</string>
+    <string name="sign_in_successful">Successfully signed in</string>
+    <string name="sign_in_failed">Sign in failed</string>
 
     <!-- UI -->
     <string name="collected_stickers_stats">You have collected %1$d of %2$d available stickers so far</string>

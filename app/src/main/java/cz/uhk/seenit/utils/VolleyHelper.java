@@ -18,16 +18,11 @@ import com.google.gson.JsonParseException;
 
 import org.json.JSONObject;
 
-import cz.uhk.seenit.R;
+public class VolleyHelper {
 
-// Trida pro JSON requesty a nacitani obrazku z URL
-public class VolleyUtils {
-
-    // Request queue existuje pouze jedna
     // Slouzi k vytvareni JSON requestu na fake JSON API
     private static RequestQueue requestQueue;
 
-    // Image loader existuje pouze jeden
     // Slouzi k nacitani obrazku z URL do NetworkImageView
     private static ImageLoader imageLoader;
 
@@ -41,7 +36,6 @@ public class VolleyUtils {
         getRequestQueue(context).add(request);
     }
 
-    // Vrat request queue, pokud jeste neexistuje tak ji vytvor
     private static RequestQueue getRequestQueue(Context context) {
         if (requestQueue == null) {
             requestQueue = Volley.newRequestQueue(context.getApplicationContext());
@@ -50,12 +44,11 @@ public class VolleyUtils {
         return requestQueue;
     }
 
-    // Vrat image loader, pokud jeste neexistuje tak ho vytvor
     public static ImageLoader getImageLoader(Context context) {
         if (imageLoader == null) {
             imageLoader = new ImageLoader(getRequestQueue(context), new ImageLoader.ImageCache() {
-                // Image loader vyuziva cache, ktera drzi maximalne 10 obrazku
-                private final LruCache<String, Bitmap> cache = new LruCache<>(10);
+                // Image loader vyuziva cache, ktera drzi maximalne 20 obrazku
+                private final LruCache<String, Bitmap> cache = new LruCache<>(20);
 
                 public void putBitmap(String url, Bitmap bitmap) {
                     cache.put(url, bitmap);

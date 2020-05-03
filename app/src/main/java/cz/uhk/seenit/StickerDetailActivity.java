@@ -17,7 +17,7 @@ import org.json.JSONObject;
 import cz.uhk.seenit.model.StickerDetail;
 import cz.uhk.seenit.utils.Formatter;
 import cz.uhk.seenit.utils.Logger;
-import cz.uhk.seenit.utils.VolleyUtils;
+import cz.uhk.seenit.utils.VolleyHelper;
 
 public class StickerDetailActivity extends BaseAppCompatActivity {
 
@@ -48,7 +48,7 @@ public class StickerDetailActivity extends BaseAppCompatActivity {
             detailCouldNotBeLoaded(null);
         } else {
             // Mame ID samolepky, udelame request na detail
-            VolleyUtils.MakeGetRequest(FAKE_URL + stickerId, getStickerDetailListener, getStickerDetailErrorListener, this);
+            VolleyHelper.MakeGetRequest(FAKE_URL + stickerId, getStickerDetailListener, getStickerDetailErrorListener, this);
         }
     }
 
@@ -57,11 +57,11 @@ public class StickerDetailActivity extends BaseAppCompatActivity {
         // Nacteni detailu samolepky bylo uspesne
         public void onResponse(JSONObject response) {
             // Mame detail samolepky, muzeme aktualizovat UI
-            StickerDetail result = VolleyUtils.getJavaObjectFromJson(response, StickerDetail.class);
+            StickerDetail result = VolleyHelper.getJavaObjectFromJson(response, StickerDetail.class);
 
             // Nastaveni ikony samolepky
             NetworkImageView networkImageView = findViewById(R.id.sticker_detail_icon);
-            networkImageView.setImageUrl(result.iconUrl.toString(), VolleyUtils.getImageLoader(getApplicationContext()));
+            networkImageView.setImageUrl(result.iconUrl.toString(), VolleyHelper.getImageLoader(getApplicationContext()));
 
             // Nastaveni jmena samolepky
             AppCompatTextView name = findViewById(R.id.sticker_detail_name);

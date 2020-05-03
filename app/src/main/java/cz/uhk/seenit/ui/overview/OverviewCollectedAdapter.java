@@ -15,7 +15,7 @@ import cz.uhk.seenit.R;
 import cz.uhk.seenit.StickerDetailActivity;
 import cz.uhk.seenit.model.OverviewForUser;
 import cz.uhk.seenit.utils.Formatter;
-import cz.uhk.seenit.utils.VolleyUtils;
+import cz.uhk.seenit.utils.VolleyHelper;
 
 public class OverviewCollectedAdapter extends RecyclerView.Adapter<OverviewCollectedViewHolder> {
     // Kolekce samolepek
@@ -45,7 +45,7 @@ public class OverviewCollectedAdapter extends RecyclerView.Adapter<OverviewColle
         holder.id = sticker.id;
         holder.name.setText(sticker.name);
         holder.collectedDate.setText(Formatter.formatDateShort(sticker.collectedDate));
-        holder.icon.setImageUrl(sticker.iconUrl.toString(), VolleyUtils.getImageLoader(context));
+        holder.icon.setImageUrl(sticker.iconUrl.toString(), VolleyHelper.getImageLoader(context));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

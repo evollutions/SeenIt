@@ -29,7 +29,7 @@ import cz.uhk.seenit.StickerDetailActivity;
 import cz.uhk.seenit.model.Collected;
 import cz.uhk.seenit.ui.BaseFragment;
 import cz.uhk.seenit.utils.Logger;
-import cz.uhk.seenit.utils.VolleyUtils;
+import cz.uhk.seenit.utils.VolleyHelper;
 import me.dm7.barcodescanner.zbar.BarcodeFormat;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
@@ -182,7 +182,7 @@ public class ScanFragment extends BaseFragment implements ZBarScannerView.Result
             }
 
             // Request je bez parametru kvuli fake API, jinak by jsme posilali lokaci uzivatele a ID samolepky
-            VolleyUtils.MakeGetRequest(FAKE_URL + responseId, getCollectListener, getCollectErrorListener, getContext());
+            VolleyHelper.MakeGetRequest(FAKE_URL + responseId, getCollectListener, getCollectErrorListener, getContext());
         }
 
         @Override
@@ -203,7 +203,7 @@ public class ScanFragment extends BaseFragment implements ZBarScannerView.Result
         public void onResponse(JSONObject response) {
             // Sebrani samolepky bylo uspesne
             // Prevedeni odpovedi na pouzitelny objekt
-            Collected result = VolleyUtils.getJavaObjectFromJson(response, Collected.class);
+            Collected result = VolleyHelper.getJavaObjectFromJson(response, Collected.class);
 
             if (result.success) {
                 // Samolepku jsme uspesne sebrali, zmen pomocnou promennou
