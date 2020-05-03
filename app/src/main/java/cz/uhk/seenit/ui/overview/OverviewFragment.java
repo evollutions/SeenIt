@@ -26,20 +26,20 @@ public class OverviewFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
 
-    // Staticka URL fake JSON serveru pro nacteni overview uzivatele
+    // Staticka URL fake JSON API pro nacteni overview uzivatele
     private static final String FAKE_URL = "https://my-json-server.typicode.com/evollutions/SeenIt/overviews/1";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_overview, container, false);
+        View root = inflater.inflate(R.layout.fragment_overview, container, false);
 
-        recyclerView = view.findViewById(R.id.overview_collected_recycler);
+        recyclerView = root.findViewById(R.id.overview_collected_recycler);
         // Po nacteni se kolekce jiz nemeni
         recyclerView.setHasFixedSize(true);
         // Nastaveni layoutu pro recycler
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        return view;
+        return root;
     }
 
     @Override

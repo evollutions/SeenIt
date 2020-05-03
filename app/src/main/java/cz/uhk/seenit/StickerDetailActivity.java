@@ -23,7 +23,7 @@ public class StickerDetailActivity extends BaseAppCompatActivity {
 
     public static final String INTENT_STICKER_ID = "STICKER_ID";
 
-    // Staticka URL fake JSON serveru pro nacteni detailu samolepky
+    // Staticka URL fake JSON API pro nacteni detailu samolepky
     private static final String FAKE_URL = "https://my-json-server.typicode.com/evollutions/SeenIt/stickers/";
 
     @Override

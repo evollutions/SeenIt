@@ -4,13 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import com.google.android.material.snackbar.Snackbar;
+import cz.uhk.seenit.R;
 
 public class GuiUtils {
 
@@ -26,20 +25,24 @@ public class GuiUtils {
         }
     }
 
-    public static void showSnackbar(String text, int length, View view) {
-        Snackbar.make(view, text, length).show();
-    }
-
     public static void showToast(String text, int length, Context context) {
         Toast.makeText(context, text, length).show();
     }
 
-    public static void showOkDialog(String title, String message, @Nullable DialogInterface.OnClickListener listener, Context context) {
-        new AlertDialog.Builder(context)
+    public static void showDialog(String title, String message, @Nullable DialogInterface.OnClickListener positiveListener, @Nullable DialogInterface.OnClickListener negativeListener, Context context) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton("OK", listener)
-                .show();
+                .setCancelable(false);
+
+        if (positiveListener != null) {
+            dialog.setPositiveButton(negativeListener == null ? R.string.ok : R.string.yes, positiveListener);
+        }
+
+        if (negativeListener != null) {
+            dialog.setNegativeButton(R.string.no, negativeListener);
+        }
+
+        dialog.show();
     }
 }

@@ -1,9 +1,8 @@
 package cz.uhk.seenit.ui.map;
 
 import android.Manifest;
-import android.content.DialogInterface;
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -11,9 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -41,12 +37,16 @@ import cz.uhk.seenit.utils.VolleyUtils;
 
 import static android.content.Context.LOCATION_SERVICE;
 
-public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnMarkerClickListener, OnRequestPermissionsResultCallback {
+public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnMarkerClickListener {
 
-    private static final String[] LOCATION_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
-    private static final int REQUEST_LOCATION_CODE = 1;
+    // Vsechna potrebna povoleni pro zobrazeni mapy
+    private static final String[] REQUIRED_PERMISSIONS = {
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
 
-    // Staticka URL fake JSON serveru pro nacteni samolepek v okoli uzivatele
+    private static final int PERMISSION_REQUEST_CODE = 69;
+
+    // Staticka URL fake JSON API pro nacteni samolepek v okoli uzivatele
     private static final String FAKE_URL = "https://my-json-server.typicode.com/evollutions/SeenIt/stickersForLoc/";
 
     private GoogleMap map;
@@ -61,36 +61,23 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Inicializace spravce lokace pro ziskani pozice uzivatele
+        locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+
         handlePermissions();
     }
 
-    private void handlePermissions() {
-        // Handling opraveni na lokaci
-        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
-            // Jiz mame pristup k lokaci a pokracujeme
-            initializeMap();
-        } else {
-            // Pristup k lokaci nemame, musime o nej pozadat
-            if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
-                // Uzivatel klikl na 'Deny' ale ne na 'Don't show again', dame mu vedet proc potrebujeme povoleni
-                showOkDialog(R.string.alert, R.string.need_permission_location, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Po kliku na OK pozadame
-                        requestPermissions(LOCATION_PERMISSIONS, REQUEST_LOCATION_CODE);
-                    }
-                });
-            } else {
-                requestPermissions(LOCATION_PERMISSIONS, REQUEST_LOCATION_CODE);
-            }
-        }
-    }
+    @Override
+    public void onPermissionsGranted() {
+        super.onPermissionsGranted();
 
-    private void initializeMap() {
         // Inicializace mapy s callbackem onMapReady
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
+    // Povoleni jsou osetrena, ale Android Studio to nedokaze detekovat
+    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
         // Mapa je pripravena, je nacase ziskat lokaci uzivatele
@@ -102,13 +89,12 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
         // Listener kliknuti na marker pro zobrazeni detailu samolepky
         map.setOnMarkerClickListener(this);
 
-        if (!checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
-            // Nemelo by nastat, ale Android Studio ten check proste vylozene chce!
-            showToast(R.string.no_permission_location);
-        } else {
+        if (checkPermissions(REQUIRED_PERMISSIONS)) {
             // Dame pozadavek na aktualizaci lokace uzivatele po 5 sekundach a 100 metrech
-            locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 100, locationListener);
+        } else {
+            // Nemame potrebna povoleni
+            onPermissionsDenied();
         }
     }
 
@@ -117,10 +103,10 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
         public void onLocationChanged(@NotNull final Location location) {
             // Mame aktualni lokaci uzivatele, muzeme udelat request na samolepky v okoli
 
-            // Fake logika pro vyber jake samolepky vratit (melo by resit realne API), 1 pro UHK, 2 pro lesy
+            // Logika pro vyber jake samolepky vratit (melo by resit realne API), 1 pro UHK, 2 pro lesy
             int locationId = location.getLatitude() > 50.203 ? 1 : 2;
 
-            // Request je bez parametru protoze pouzivame fake json api, jinak by jsme posilali lokaci uzivatele
+            // Request je bez parametru protoze pouzivame fake JSON API, jinak by jsme posilali lokaci uzivatele
             VolleyUtils.MakeGetRequest(FAKE_URL + locationId, getStickersForLocListener, getStickersForLocErrorListener, getContext());
 
             // Pribliz kameru mapy na pozici uzivatele
@@ -180,7 +166,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
                     : String.format(getResString(R.string.stickers_in_area), result.stickers.size());
 
             // Zobrazime snackbar s vysledkem
-            showSnackbar(stickerCountText);
+            showToast(stickerCountText);
         }
     };
 
@@ -200,30 +186,28 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
             intent.putExtra(StickerDetailActivity.INTENT_STICKER_ID, markerInfo.stickerId);
             startActivity(intent);
         } else {
-            showSnackbar(R.string.sticker_not_collected);
+            showToast(R.string.sticker_not_collected);
         }
 
         return true;
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_LOCATION_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Mame povoleni k lokaci, muzeme pokracovat
-                initializeMap();
-            } else {
-                Logger.LogWarningAndShowToast(R.string.no_permission_location, null, getContext());
-            }
-        } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (locationManager != null) {
+            locationManager.removeUpdates(locationListener);
         }
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public String[] getRequiredPermissions() {
+        return REQUIRED_PERMISSIONS;
+    }
 
-        locationManager.removeUpdates(locationListener);
+    @Override
+    public int getPermissionRequestCode() {
+        return PERMISSION_REQUEST_CODE;
     }
 }

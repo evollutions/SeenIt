@@ -18,6 +18,8 @@ import com.google.gson.JsonParseException;
 
 import org.json.JSONObject;
 
+import cz.uhk.seenit.R;
+
 // Trida pro JSON requesty a nacitani obrazku z URL
 public class VolleyUtils {
 
@@ -34,14 +36,6 @@ public class VolleyUtils {
     public static void MakeGetRequest(String url, Listener<JSONObject> responseListener, @Nullable ErrorListener errorListener, Context context) {
         // Vytvor GET request podle parametru
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, responseListener, errorListener);
-
-        // Pridej request do fronty
-        getRequestQueue(context).add(request);
-    }
-
-    public static void MakePostRequest(String url, JSONObject jsonRequest, Listener<JSONObject> responseListener, @Nullable ErrorListener errorListener, Context context) {
-        // Vytvor POST request podle parametru
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonRequest, responseListener, errorListener);
 
         // Pridej request do fronty
         getRequestQueue(context).add(request);

@@ -1,7 +1,9 @@
 package cz.uhk.seenit.ui.overview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.cardview.widget.CardView;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import cz.uhk.seenit.R;
+import cz.uhk.seenit.StickerDetailActivity;
 import cz.uhk.seenit.model.OverviewForUser;
 import cz.uhk.seenit.utils.Formatter;
 import cz.uhk.seenit.utils.VolleyUtils;
@@ -34,7 +37,7 @@ public class OverviewCollectedAdapter extends RecyclerView.Adapter<OverviewColle
     }
 
     @Override
-    public void onBindViewHolder(OverviewCollectedViewHolder holder, int position) {
+    public void onBindViewHolder(final OverviewCollectedViewHolder holder, int position) {
         // Ziskame aktualni samolepku
         OverviewForUser.Sticker sticker = stickers.get(position);
 
@@ -43,6 +46,17 @@ public class OverviewCollectedAdapter extends RecyclerView.Adapter<OverviewColle
         holder.name.setText(sticker.name);
         holder.collectedDate.setText(Formatter.formatDateShort(sticker.collectedDate));
         holder.icon.setImageUrl(sticker.iconUrl.toString(), VolleyUtils.getImageLoader(context));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Zobraz detail samolepky pri kliknuti na kartu
+                Intent intent = new Intent(context, StickerDetailActivity.class);
+                intent.putExtra(StickerDetailActivity.INTENT_STICKER_ID, holder.id);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override

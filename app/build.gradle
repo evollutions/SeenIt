@@ -20,7 +20,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -40,4 +39,5 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'org.jetbrains:annotations-java5:15.0'
+    implementation 'me.dm7.barcodescanner:zbar:1.9.13'
 }
