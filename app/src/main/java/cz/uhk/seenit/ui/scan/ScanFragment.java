@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,7 @@ import me.dm7.barcodescanner.zbar.BarcodeFormat;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
+import static android.content.Context.CONNECTIVITY_SERVICE;
 import static android.content.Context.LOCATION_SERVICE;
 
 public class ScanFragment extends BaseFragment implements ZBarScannerView.ResultHandler {
@@ -46,11 +48,15 @@ public class ScanFragment extends BaseFragment implements ZBarScannerView.Result
 
     private static final int PERMISSION_REQUEST_CODE = 42;
 
+    // Staticka URL fake JSON API pro sebrani naskenovane samolepky
+    private static final String FAKE_URL = "https://my-json-server.typicode.com/evollutions/SeenIt/collect/";
+
     // Budeme skenovat pouze QR kody
     private static final List<BarcodeFormat> SCANNED_FORMATS = Collections.singletonList(BarcodeFormat.QRCODE);
 
     private ZBarScannerView scannerView;
     private LocationManager locationManager;
+    private ConnectivityManager connectivityManager;
 
     private AppCompatTextView hint;
     private ProgressBar progressBar;
@@ -58,9 +64,6 @@ public class ScanFragment extends BaseFragment implements ZBarScannerView.Result
     // Pomocne promenne pro stavovost bez realneho API
     private String lastScanContent;
     private boolean stickerNotCollected = true;
-
-    // Staticka URL fake JSON API pro sebrani naskenovane samolepky
-    private static final String FAKE_URL = "https://my-json-server.typicode.com/evollutions/SeenIt/collect/";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,6 +89,8 @@ public class ScanFragment extends BaseFragment implements ZBarScannerView.Result
 
         // Inicializace spravce lokace pro ziskani pozice uzivatele
         locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+        // Inicializace spravce konektivity pro ziskani statusu pripojeni
+        connectivityManager = ((ConnectivityManager) getActivity().getSystemService(CONNECTIVITY_SERVICE));
 
         // Vyreseni potrebnych povoleni v bazove tride
         handlePermissions();
@@ -155,6 +160,11 @@ public class ScanFragment extends BaseFragment implements ZBarScannerView.Result
         if (checkPermissions(REQUIRED_PERMISSIONS)) {
             // ID samolepky nalezeno, dame pozadavek na aktualizaci lokace uzivatele pro sebrani
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 100, locationUpdateListener);
+
+            if (!isNetworkAvailable() || !locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                // Nemame pristup k internetu nebo lokaci, informujeme uzivatele
+                showToast(R.string.internet_or_location_needed);
+            }
         } else {
             // Nemame potrebna povoleni
             onPermissionsDenied();
@@ -228,15 +238,10 @@ public class ScanFragment extends BaseFragment implements ZBarScannerView.Result
         public void onErrorResponse(VolleyError error) {
             // Sebrani samolepky bylo neuspesne
             Logger.LogErrorAndShowToast(R.string.could_not_collect_sticker, error, getContext());
+            changeCollectionState(false);
+            continueScan();
         }
     };
-
-    @Override
-    public void onPermissionsDenied() {
-        super.onPermissionsDenied();
-
-        int pepa = 1;
-    }
 
     @Override
     public String[] getRequiredPermissions() {
@@ -246,5 +251,9 @@ public class ScanFragment extends BaseFragment implements ZBarScannerView.Result
     @Override
     public int getPermissionRequestCode() {
         return PERMISSION_REQUEST_CODE;
+    }
+
+    public boolean isNetworkAvailable() {
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 }

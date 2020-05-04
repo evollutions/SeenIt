@@ -14,12 +14,14 @@ import cz.uhk.seenit.utils.GoogleSignInHelper;
 
 public class SplashActivity extends BaseAppCompatActivity {
 
+    private GoogleSignInClient signInClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Pokusime se o automaticke prihlaseni
-        GoogleSignInClient signInClient = GoogleSignInHelper.getInstance(this);
+        signInClient = GoogleSignInHelper.getInstance(this);
         signInClient.silentSignIn().addOnCompleteListener(this, new OnCompleteListener<GoogleSignInAccount>() {
             @Override
             public void onComplete(@NonNull Task<GoogleSignInAccount> task) {

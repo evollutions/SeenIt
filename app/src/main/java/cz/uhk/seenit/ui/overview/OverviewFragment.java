@@ -24,10 +24,10 @@ import cz.uhk.seenit.utils.VolleyHelper;
 
 public class OverviewFragment extends BaseFragment {
 
-    private RecyclerView recyclerView;
-
     // Staticka URL fake JSON API pro nacteni overview uzivatele
     private static final String FAKE_URL = "https://my-json-server.typicode.com/evollutions/SeenIt/overviews/1";
+
+    private RecyclerView recyclerView;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

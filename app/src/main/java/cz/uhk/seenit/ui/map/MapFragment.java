@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ import cz.uhk.seenit.ui.BaseFragment;
 import cz.uhk.seenit.utils.Logger;
 import cz.uhk.seenit.utils.VolleyHelper;
 
+import static android.content.Context.CONNECTIVITY_SERVICE;
 import static android.content.Context.LOCATION_SERVICE;
 
 public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnMarkerClickListener {
@@ -51,6 +53,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
 
     private GoogleMap map;
     private LocationManager locationManager;
+    private ConnectivityManager connectivityManager;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +66,8 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
 
         // Inicializace spravce lokace pro ziskani pozice uzivatele
         locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+        // Inicializace spravce konektivity pro ziskani statusu pripojeni
+        connectivityManager = ((ConnectivityManager) getActivity().getSystemService(CONNECTIVITY_SERVICE));
 
         handlePermissions();
     }
@@ -92,6 +97,11 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
         if (checkPermissions(REQUIRED_PERMISSIONS)) {
             // Dame pozadavek na aktualizaci lokace uzivatele po 5 sekundach a 100 metrech
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 100, locationListener);
+
+            if (!isNetworkAvailable() || !locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                // Nemame pristup k internetu nebo lokaci, informujeme uzivatele
+                showToast(R.string.internet_or_location_needed);
+            }
         } else {
             // Nemame potrebna povoleni
             onPermissionsDenied();
@@ -209,5 +219,9 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback, OnM
     @Override
     public int getPermissionRequestCode() {
         return PERMISSION_REQUEST_CODE;
+    }
+
+    public boolean isNetworkAvailable() {
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 }

@@ -18,7 +18,7 @@ import cz.uhk.seenit.utils.Logger;
 
 public class SignInActivity extends BaseAppCompatActivity {
 
-    private GoogleSignInClient googleSignInClient;
+    private GoogleSignInClient signInClient;
 
     private int REQUEST_CODE_SIGN_IN = 666;
 
@@ -32,14 +32,14 @@ public class SignInActivity extends BaseAppCompatActivity {
         Toolbar toolbar = findViewById(R.id.sign_in_toolbar);
         setSupportActionBar(toolbar);
 
-        googleSignInClient = GoogleSignInHelper.getInstance(this);
+        signInClient = GoogleSignInHelper.getInstance(this);
 
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Po kliknuti spustime aktivitu prihlaseni
-                Intent intent = googleSignInClient.getSignInIntent();
+                // Po kliknuti na tlacitko Sign in spustime aktivitu prihlaseni
+                Intent intent = signInClient.getSignInIntent();
                 startActivityForResult(intent, REQUEST_CODE_SIGN_IN);
             }
         });

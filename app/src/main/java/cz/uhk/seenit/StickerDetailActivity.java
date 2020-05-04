@@ -1,6 +1,11 @@
 package cz.uhk.seenit;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -19,12 +24,15 @@ import cz.uhk.seenit.utils.Formatter;
 import cz.uhk.seenit.utils.Logger;
 import cz.uhk.seenit.utils.VolleyHelper;
 
-public class StickerDetailActivity extends BaseAppCompatActivity {
+public class StickerDetailActivity extends BaseAppCompatActivity implements SensorEventListener {
 
     public static final String INTENT_STICKER_ID = "STICKER_ID";
 
     // Staticka URL fake JSON API pro nacteni detailu samolepky
     private static final String FAKE_URL = "https://my-json-server.typicode.com/evollutions/SeenIt/stickers/";
+
+    // Pro detekci zatreseni
+    private SensorManager sensorManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +58,25 @@ public class StickerDetailActivity extends BaseAppCompatActivity {
             // Mame ID samolepky, udelame request na detail
             VolleyHelper.MakeGetRequest(FAKE_URL + stickerId, getStickerDetailListener, getStickerDetailErrorListener, this);
         }
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Registrace listeneru akcelerometru pri obnove aktivity
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Zruseni registrace listeneru akcelerometru pri pauze aktivity
+        sensorManager.unregisterListener(this);
     }
 
     private final Response.Listener<JSONObject> getStickerDetailListener = new Response.Listener<JSONObject>() {
@@ -60,8 +87,8 @@ public class StickerDetailActivity extends BaseAppCompatActivity {
             StickerDetail result = VolleyHelper.getJavaObjectFromJson(response, StickerDetail.class);
 
             // Nastaveni ikony samolepky
-            NetworkImageView networkImageView = findViewById(R.id.sticker_detail_icon);
-            networkImageView.setImageUrl(result.iconUrl.toString(), VolleyHelper.getImageLoader(getApplicationContext()));
+            NetworkImageView icon = findViewById(R.id.sticker_detail_icon);
+            icon.setImageUrl(result.iconUrl.toString(), VolleyHelper.getImageLoader(getApplicationContext()));
 
             // Nastaveni jmena samolepky
             AppCompatTextView name = findViewById(R.id.sticker_detail_name);
@@ -94,6 +121,27 @@ public class StickerDetailActivity extends BaseAppCompatActivity {
             detailCouldNotBeLoaded(error);
         }
     };
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        float gX = event.values[0] / SensorManager.STANDARD_GRAVITY;
+        float gY = event.values[1] / SensorManager.STANDARD_GRAVITY;
+        float gZ = event.values[2] / SensorManager.STANDARD_GRAVITY;
+
+        // Vypocitame gravitacni silu
+        double gForce = Math.sqrt(gX * gX + gY * gY + gZ * gZ);
+
+        // Pokud gravitacni sila prekroci 2G, tak zavreme aktivitu
+        if (gForce > 2.0) {
+            showToast(R.string.shake_detected);
+            finish();
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // Nezajima nas
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
