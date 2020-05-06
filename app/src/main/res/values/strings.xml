@@ -46,4 +46,6 @@
     <string name="collected_date">Collected on %1$s</string>
     <string name="collected_last_date">Last collected on %1$s</string>
     <string name="placeholder">Placeholder text</string>
+    <string name="sign_in_to_continue">Please sign in to continue</string>
+    <string name="welcome_to">Welcome to</string>
 </resources>

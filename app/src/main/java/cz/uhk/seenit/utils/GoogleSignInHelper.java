@@ -15,7 +15,6 @@ public class GoogleSignInHelper {
 
     public static GoogleSignInClient getInstance(Context context) {
         if (signInClient == null) {
-
             GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(context.getString(R.string.default_web_client_id))
                     .requestEmail()
